@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-import tensorflow as tf
 
 def detect_tumor(image_path):
     """

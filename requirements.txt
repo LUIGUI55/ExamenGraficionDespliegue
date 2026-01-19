@@ -1,5 +1,5 @@
 Django>=4.2
-tensorflow
+Django>=4.2
 opencv-python-headless
 mediapipe
 numpy
