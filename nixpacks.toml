@@ -1,0 +1,19 @@
+[phases.setup]
+nixPkgs = [
+    "python311",
+    "glib",
+    "libGL",
+    "libz",
+    "xorg.libxcb",
+    "xorg.libX11",
+    "xorg.libXext",
+    "xorg.libXrender",
+    "xorg.libXi",
+    "stdenv.cc.cc.lib"
+]
+
+[phases.install]
+cmds = ["python -m venv /opt/venv && . /opt/venv/bin/activate && pip install -r requirements.txt"]
+
+[start]
+cmd = ". /opt/venv/bin/activate && gunicorn medical_ai.wsgi"
