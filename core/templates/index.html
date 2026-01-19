@@ -3,12 +3,8 @@
 {% block content %}
 <div class="text-center mb-12">
     <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">
-        Diagnóstico Inteligente Asistido
+        Examen Graficación
     </h1>
-    <p class="text-xl text-slate-300 max-w-2xl mx-auto">
-        Utilizando Inteligencia Artificial avanzada para la detección temprana de anomalías cerebrales y análisis
-        emocional.
-    </p>
 </div>
 
 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -24,7 +20,7 @@
         </div>
         <h2 class="text-2xl font-bold text-white mb-3">Detección de Emociones</h2>
         <p class="text-slate-400 mb-6">
-            Analiza expresiones faciales para identificar estados emocionales utilizando Face Mesh landmarks.
+            Analiza expresiones faciales para identificar estados emocionales.
         </p>
         <form action="/predict/emotion" method="post" enctype="multipart/form-data" class="space-y-4">
             {% csrf_token %}
