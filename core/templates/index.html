@@ -1,72 +1,117 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="text-center mb-12">
-    <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">
-        Examen Graficación
+<div class="text-center mb-16 relative">
+    <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-neon-blue/20 rounded-full blur-[100px] -z-10">
+    </div>
+    <h1 class="text-5xl md:text-7xl font-black text-white mb-6 font-tech tracking-tight">
+        MEDICAL <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple text-glow">VISION</span>
     </h1>
+    <p class="text-slate-400 max-w-2xl mx-auto text-lg">
+        Advanced AI diagnostics powered by deep learning algorithms for emotion recognition and tumor segmentation.
+    </p>
 </div>
 
-<div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+<div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
     <!-- Emotion Card -->
     <div
-        class="glass-panel rounded-2xl p-8 hover:transform hover:-translate-y-1 transition duration-300 shadow-2xl shadow-cyan-900/20">
-        <div class="h-12 w-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6 text-purple-400">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+        class="glass-panel rounded-3xl p-10 hover:transform hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
+        <div
+            class="absolute top-0 right-0 w-32 h-32 bg-neon-purple/10 rounded-full blur-3xl -mr-16 -mt-16 transition-all duration-500 group-hover:bg-neon-purple/20">
+        </div>
+
+        <div
+            class="h-16 w-16 bg-gradient-to-br from-neon-purple/20 to-blue-600/20 rounded-2xl flex items-center justify-center mb-8 border border-neon-purple/30 group-hover:border-neon-purple/60 transition-colors shadow-lg shadow-neon-purple/10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-neon-purple" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         </div>
-        <h2 class="text-2xl font-bold text-white mb-3">Detección de Emociones</h2>
-        <p class="text-slate-400 mb-6">
-            Analiza expresiones faciales para identificar estados emocionales.
+
+        <h2 class="text-3xl font-bold text-white mb-4 font-tech">Emotion Analysis</h2>
+        <p class="text-slate-400 mb-8 leading-relaxed">
+            Real-time facial expression using Convolutional Neural Networks to classify emotional states with high
+            accuracy.
         </p>
-        <form action="/predict/emotion" method="post" enctype="multipart/form-data" class="space-y-4">
+
+        <form action="/predict/emotion" method="post" enctype="multipart/form-data" class="space-y-6">
             {% csrf_token %}
-            <div class="relative group">
+            <div class="relative group/input">
                 <input type="file" name="image" id="emotion_file" class="hidden" required
                     onchange="updateFileName('emotion')">
                 <label for="emotion_file"
-                    class="block w-full cursor-pointer bg-slate-800 border-2 border-dashed border-slate-600 rounded-xl p-6 text-center hover:border-purple-500 transition duration-300">
-                    <span class="text-slate-300 group-hover:text-white" id="emotion_label">Seleccionar Imagen
-                        Facial</span>
+                    class="block w-full cursor-pointer bg-dark-900/50 border border-slate-700/50 rounded-2xl p-8 text-center hover:border-neon-purple/50 transition duration-300 relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-neon-purple/5 opacity-0 group-hover/input:opacity-100 transition duration-300">
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center gap-3">
+                        <svg class="w-8 h-8 text-slate-500 group-hover/input:text-neon-purple transition-colors"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                        </svg>
+                        <span class="text-slate-400 font-medium group-hover/input:text-white transition-colors"
+                            id="emotion_label">Upload Facial Scan</span>
+                        <span class="text-xs text-slate-600">Supports JPG, PNG</span>
+                    </div>
                 </label>
             </div>
             <button type="submit"
-                class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl transition duration-300 shadow-lg shadow-purple-900/50">
-                Analizar Emoción
+                class="w-full btn-neon py-4 rounded-xl font-bold font-tech tracking-wide uppercase text-sm relative overflow-hidden group/btn">
+                <span class="relative z-10">Initialize Analysis</span>
             </button>
         </form>
     </div>
 
     <!-- Tumor Card -->
     <div
-        class="glass-panel rounded-2xl p-8 hover:transform hover:-translate-y-1 transition duration-300 shadow-2xl shadow-cyan-900/20">
-        <div class="h-12 w-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-6 text-cyan-400">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+        class="glass-panel rounded-3xl p-10 hover:transform hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
+        <div
+            class="absolute top-0 right-0 w-32 h-32 bg-neon-blue/10 rounded-full blur-3xl -mr-16 -mt-16 transition-all duration-500 group-hover:bg-neon-blue/20">
+        </div>
+
+        <div
+            class="h-16 w-16 bg-gradient-to-br from-neon-blue/20 to-cyan-600/20 rounded-2xl flex items-center justify-center mb-8 border border-neon-blue/30 group-hover:border-neon-blue/60 transition-colors shadow-lg shadow-neon-blue/10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-neon-blue" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
         </div>
-        <h2 class="text-2xl font-bold text-white mb-3">Detección de Tumores</h2>
-        <p class="text-slate-400 mb-6">
-            Segmentación y clasificación de anomalías en imágenes de resonancia magnética (MRI).
+
+        <h2 class="text-3xl font-bold text-white mb-4 font-tech">Tumor Detection</h2>
+        <p class="text-slate-400 mb-8 leading-relaxed">
+            Advanced segmentation of MRI scans to identify and classify anomalous tissue structures.
         </p>
-        <form action="/predict/tumor" method="post" enctype="multipart/form-data" class="space-y-4">
+
+        <form action="/predict/tumor" method="post" enctype="multipart/form-data" class="space-y-6">
             {% csrf_token %}
-            <div class="relative group">
+            <div class="relative group/input">
                 <input type="file" name="image" id="tumor_file" class="hidden" required
                     onchange="updateFileName('tumor')">
                 <label for="tumor_file"
-                    class="block w-full cursor-pointer bg-slate-800 border-2 border-dashed border-slate-600 rounded-xl p-6 text-center hover:border-cyan-500 transition duration-300">
-                    <span class="text-slate-300 group-hover:text-white" id="tumor_label">Seleccionar MRI</span>
+                    class="block w-full cursor-pointer bg-dark-900/50 border border-slate-700/50 rounded-2xl p-8 text-center hover:border-neon-blue/50 transition duration-300 relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-neon-blue/5 opacity-0 group-hover/input:opacity-100 transition duration-300">
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center gap-3">
+                        <svg class="w-8 h-8 text-slate-500 group-hover/input:text-neon-blue transition-colors"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                        </svg>
+                        <span class="text-slate-400 font-medium group-hover/input:text-white transition-colors"
+                            id="tumor_label">Upload MRI Scan</span>
+                        <span class="text-xs text-slate-600">Supports DICOM, JPG, PNG</span>
+                    </div>
                 </label>
             </div>
             <button type="submit"
-                class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-3 rounded-xl transition duration-300 shadow-lg shadow-cyan-900/50">
-                Detectar Tumor
+                class="w-full btn-neon py-4 rounded-xl font-bold font-tech tracking-wide uppercase text-sm text-neon-blue hover:text-white border-neon-blue/30 hover:border-neon-blue hover:shadow-[0_0_20px_rgba(0,243,255,0.3)]">
+                <span class="relative z-10">Start Scan</span>
             </button>
         </form>
     </div>
@@ -78,6 +123,7 @@
         const label = document.getElementById(type + '_label');
         if (input.files && input.files.length > 0) {
             label.innerText = input.files[0].name;
+            label.classList.add('text-white');
         }
     }
 </script>

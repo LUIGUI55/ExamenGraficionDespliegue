@@ -4,29 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen Graficacion</title>
+    <title>Medical AI | Advanced Diagnostics</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Outfit', 'sans-serif'],
+                        tech: ['Orbitron', 'sans-serif'],
                     },
                     colors: {
-                        medical: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            900: '#0c4a6e',
+                        cyber: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            900: '#134e4a',
+                        },
+                        neon: {
+                            blue: '#00f3ff',
+                            purple: '#bd00ff',
+                            green: '#00ff9d',
+                            pink: '#ff0055'
                         },
                         dark: {
-                            800: '#1e293b',
-                            900: '#0f172a',
+                            800: '#0a0f1c',
+                            900: '#05070a',
+                        }
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: '1', boxShadow: '0 0 15px rgba(0, 243, 255, 0.5)' },
+                            '50%': { opacity: '0.5', boxShadow: '0 0 5px rgba(0, 243, 255, 0.2)' },
                         }
                     }
                 }
@@ -35,45 +69,113 @@
     </script>
     <style>
         body {
-            background-color: #0f172a;
-            /* Slate 900 */
-            color: #f8fafc;
+            background-color: #05070a;
+            color: #e2e8f0;
+            background: radial-gradient(circle at top left, #1a1e35 0%, #05070a 100%);
+            min-height: 100vh;
+        }
+
+        /* Animated Background Mesh */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(189, 0, 255, 0.05) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .glass-panel {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 15, 28, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-panel:hover {
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 243, 255, 0.1);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .btn-neon {
+            background: linear-gradient(90deg, rgba(0, 243, 255, 0.1) 0%, rgba(0, 243, 255, 0) 100%);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            color: #00f3ff;
+            transition: all 0.3s ease;
+        }
+
+        .btn-neon:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+            border-color: #00f3ff;
+            color: white;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #00f3ff;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px #00f3ff;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
         }
     </style>
 </head>
 
-<body class="antialiased min-h-screen flex flex-col">
+<body class="antialiased min-h-screen flex flex-col font-sans selection:bg-neon-blue selection:text-black">
+    <div class="bg-mesh"></div>
+
     <!-- Navbar -->
-    <nav class="glass-panel sticky top-0 z-50 border-b border-slate-700">
+    <nav class="glass-panel sticky top-0 z-50 border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <span
-                        class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-                        Examen Graficación
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-blue to-neon-purple flex items-center justify-center shadow-lg shadow-neon-blue/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold font-tech tracking-wider text-white">
+                        MEDICAL<span class="text-neon-blue">AI</span>
                     </span>
+                </div>
+                <div class="hidden md:block">
+                    <!-- Future Nav Items -->
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800 bg-slate-900 py-6">
-        <div class="text-center text-slate-400 text-sm">
-            <p>&copy; 2026 Graficación. Demo Version.</p>
-        </div>
-    </footer>
+    <!-- Footer Removed -->
+
 </body>
 
 </html>
