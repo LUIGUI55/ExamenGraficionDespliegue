@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center mb-12">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">
+        Diagnóstico Inteligente Asistido
+    </h1>
+    <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+        Utilizando Inteligencia Artificial avanzada para la detección temprana de anomalías cerebrales y análisis
+        emocional.
+    </p>
+</div>
+
+<div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+    <!-- Emotion Card -->
+    <div
+        class="glass-panel rounded-2xl p-8 hover:transform hover:-translate-y-1 transition duration-300 shadow-2xl shadow-cyan-900/20">
+        <div class="h-12 w-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6 text-purple-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-white mb-3">Detección de Emociones</h2>
+        <p class="text-slate-400 mb-6">
+            Analiza expresiones faciales para identificar estados emocionales utilizando Face Mesh landmarks.
+        </p>
+        <form action="/predict/emotion" method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            <div class="relative group">
+                <input type="file" name="image" id="emotion_file" class="hidden" required
+                    onchange="updateFileName('emotion')">
+                <label for="emotion_file"
+                    class="block w-full cursor-pointer bg-slate-800 border-2 border-dashed border-slate-600 rounded-xl p-6 text-center hover:border-purple-500 transition duration-300">
+                    <span class="text-slate-300 group-hover:text-white" id="emotion_label">Seleccionar Imagen
+                        Facial</span>
+                </label>
+            </div>
+            <button type="submit"
+                class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl transition duration-300 shadow-lg shadow-purple-900/50">
+                Analizar Emoción
+            </button>
+        </form>
+    </div>
+
+    <!-- Tumor Card -->
+    <div
+        class="glass-panel rounded-2xl p-8 hover:transform hover:-translate-y-1 transition duration-300 shadow-2xl shadow-cyan-900/20">
+        <div class="h-12 w-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-6 text-cyan-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-white mb-3">Detección de Tumores</h2>
+        <p class="text-slate-400 mb-6">
+            Segmentación y clasificación de anomalías en imágenes de resonancia magnética (MRI).
+        </p>
+        <form action="/predict/tumor" method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            <div class="relative group">
+                <input type="file" name="image" id="tumor_file" class="hidden" required
+                    onchange="updateFileName('tumor')">
+                <label for="tumor_file"
+                    class="block w-full cursor-pointer bg-slate-800 border-2 border-dashed border-slate-600 rounded-xl p-6 text-center hover:border-cyan-500 transition duration-300">
+                    <span class="text-slate-300 group-hover:text-white" id="tumor_label">Seleccionar MRI</span>
+                </label>
+            </div>
+            <button type="submit"
+                class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-3 rounded-xl transition duration-300 shadow-lg shadow-cyan-900/50">
+                Detectar Tumor
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function updateFileName(type) {
+        const input = document.getElementById(type + '_file');
+        const label = document.getElementById(type + '_label');
+        if (input.files && input.files.length > 0) {
+            label.innerText = input.files[0].name;
+        }
+    }
+</script>
+{% endblock %}
